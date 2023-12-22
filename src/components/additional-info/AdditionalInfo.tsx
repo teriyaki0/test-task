@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { RowType } from "../../types/RowType";
-import styles from './AdditionalInfo.module.scss'
+import styles from "./AdditionalInfo.module.scss";
 
 interface AdditionalInfoProps {
   selectedRow: RowType;
