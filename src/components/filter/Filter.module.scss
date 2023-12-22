@@ -1,0 +1,35 @@
+.search {
+    position: relative;
+    margin: 20px;
+    width: 300px;
+  
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+  
+      &:focus {
+        outline: none;
+      }
+    }
+  
+
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #7c5dfa;
+    color: white;
+    border: none;
+    padding: 15px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        border: none
+    }
+  
+}
+}

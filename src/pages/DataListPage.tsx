@@ -1,3 +1,5 @@
+import styles from "./DataListPage.module.scss";
+
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RowType } from "../types/RowType";
@@ -17,7 +19,7 @@ const DataListPage = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(page);
-  const [itemsPerPage] = useState(20);
+  const [itemsPerPage] = useState(17);
   const [selectedRow, setSelectedRow] = useState<RowType | null>(null);
   const [filterText, setFilterText] = useState("");
   const [sortConfig, setSortConfig] = useState<{
@@ -29,7 +31,6 @@ const DataListPage = () => {
   });
 
   useEffect(() => {
-    setIsLoading(true);
     axios
       .get("http://localhost:3000/data")
       .then((response) => {
@@ -128,26 +129,33 @@ const DataListPage = () => {
   }, [filteredAndSortedData, sortConfig, indexOfFirstItem, indexOfLastItem]);
 
   return (
-    <>
-      <Filter onFilter={handleFilter} />
-      {isLoading ? ( 
-        <p>Loading...</p>
+    <div className={styles.root}>
+      <div>
+        <Filter onFilter={handleFilter} />
+        <div className={styles.table}>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <Table
+              data={sortedData}
+              onRowClick={handleRowClick}
+              onHeaderClick={handleHeaderClick}
+            />
+          )}
+          {selectedRow && <AdditionalInfo selectedRow={selectedRow} />}
+        </div>
+      </div>
+      {filteredAndSortedData.length < 18 ? (
+        ""
       ) : (
-        <Table
-          data={sortedData}
-          onRowClick={handleRowClick}
-          onHeaderClick={handleHeaderClick}
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={filteredAndSortedData.length}
+          paginate={paginate}
+          currentPage={currentPage}
         />
       )}
-
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={filteredAndSortedData.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
-      {selectedRow && <AdditionalInfo selectedRow={selectedRow} />}
-    </>
+    </div>
   );
 };
 

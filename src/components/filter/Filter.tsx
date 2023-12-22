@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-
+import styles from './Filter.module.scss'
 type FilterComponentProps = {
     onFilter: (filterText: string) => void;
   };
@@ -16,14 +16,15 @@ const Filter: FC<FilterComponentProps> = ({ onFilter }) => {
     };
   
     return (
-      <div>
+      <div className={styles.search}>
         <input
           type="text"
           value={filterText}
           onChange={handleFilterChange}
-          placeholder="Введите текст для фильтрации"
+          placeholder="Введите текст"
+          className={styles.search__input}
         />
-        <button onClick={handleFilterClick}>Найти</button>
+        <button onClick={handleFilterClick} className={styles.search__button}>🔎</button>
       </div>
     );
   };

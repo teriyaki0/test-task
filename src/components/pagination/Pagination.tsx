@@ -1,5 +1,5 @@
 import { FC } from "react";
-
+import styles from './Pagination.module.scss'
 interface PaginationProps {
   itemsPerPage: number;
   totalItems: number;
@@ -19,8 +19,8 @@ const Pagination: FC<PaginationProps> = ({
   }
 
   return (
-    <div>
-      <ul>
+    <div className={styles.root}>
+      <ul className={styles.list}>
         {pageNumbers.map((number) => (
           <li key={number} onClick={() => paginate(number)}>
             <button>{number}</button>

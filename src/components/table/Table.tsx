@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { RowType } from "../../types/RowType";
+import styles from "./Table.module.scss";
 
 type TableProps = {
   data: RowType[];
@@ -13,9 +14,12 @@ const TableComponent: FC<TableProps> = ({
   onHeaderClick,
 }) => {
   const [selectedRow, setSelectedRow] = useState<RowType | null>(null);
-  const [sortConfig, setSortConfig] = useState<{ key: string, direction: string }>({
-    key: '',
-    direction: ''
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: string;
+  }>({
+    key: "",
+    direction: "",
   });
 
   const handleRowClick = (row: RowType) => {
@@ -34,34 +38,62 @@ const TableComponent: FC<TableProps> = ({
     onHeaderClick(key);
   };
 
-
   const renderTableHeader = () => {
     return (
-      <tr>
-        <th onClick={() => handleHeaderClick("_id")}>ID</th>
-        <th onClick={() => handleHeaderClick("firstName")}>First Name</th>
-        <th onClick={() => handleHeaderClick("lastName")}>Last Name</th>
-        <th onClick={() => handleHeaderClick("email")}>Email</th>
-        <th onClick={() => handleHeaderClick("phone")}>Phone</th>
+      <tr className={styles.table__row}>
+        <th
+          className={styles.table__header}
+          onClick={() => handleHeaderClick("_id")}
+        >
+          ID
+        </th>
+        <th
+          className={styles.table__header}
+          onClick={() => handleHeaderClick("firstName")}
+        >
+          First Name
+        </th>
+        <th
+          className={styles.table__header}
+          onClick={() => handleHeaderClick("lastName")}
+        >
+          Last Name
+        </th>
+        <th
+          className={styles.table__header}
+          onClick={() => handleHeaderClick("email")}
+        >
+          Email
+        </th>
+        <th
+          className={styles.table__header}
+          onClick={() => handleHeaderClick("phone")}
+        >
+          Phone
+        </th>
       </tr>
     );
   };
 
   const renderTableData = () => {
     return data.map((row: RowType) => (
-      <tr key={row._id} onClick={() => handleRowClick(row)}>
-        <td>{row._id}</td>
-        <td>{row.firstName}</td>
-        <td>{row.lastName}</td>
-        <td>{row.email}</td>
-        <td>{row.phone}</td>
+      <tr
+        key={row._id}
+        onClick={() => handleRowClick(row)}
+        className={row._id === selectedRow?._id ? styles.selectedRow : styles.table__row} 
+      >
+        <td className={styles.table__cell}>{row._id}</td>
+        <td className={styles.table__cell}>{row.firstName}</td>
+        <td className={styles.table__cell}>{row.lastName}</td>
+        <td className={styles.table__cell}>{row.email}</td>
+        <td className={styles.table__cell}>{row.phone}</td>
       </tr>
     ));
   };
 
   return (
-    <div>
-      <table>
+    <div className={styles.root}>
+      <table className={styles.table}>
         <thead>{renderTableHeader()}</thead>
         <tbody>{renderTableData()}</tbody>
       </table>
@@ -70,6 +102,3 @@ const TableComponent: FC<TableProps> = ({
 };
 
 export default TableComponent;
-
-
-
