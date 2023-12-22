@@ -45,31 +45,31 @@ const TableComponent: FC<TableProps> = ({
           className={styles.table__header}
           onClick={() => handleHeaderClick("_id")}
         >
-          ID
+          ID⇅
         </th>
         <th
           className={styles.table__header}
           onClick={() => handleHeaderClick("firstName")}
         >
-          First Name
+          First Name⇅
         </th>
         <th
           className={styles.table__header}
           onClick={() => handleHeaderClick("lastName")}
         >
-          Last Name
+          Last Name⇅
         </th>
         <th
           className={styles.table__header}
           onClick={() => handleHeaderClick("email")}
         >
-          Email
+          Email⇅
         </th>
         <th
           className={styles.table__header}
           onClick={() => handleHeaderClick("phone")}
         >
-          Phone
+          Phone⇅
         </th>
       </tr>
     );
