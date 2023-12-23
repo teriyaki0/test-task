@@ -29,12 +29,11 @@ const DataListPage = () => {
     key: "",
     direction: "",
   });
-
+  
   useEffect(() => {
-    const api = process.env.NODE_ENV === 'production' ? 
-    (process.env.API_URL ? process.env.API_URL : "http://localhost:3000/data") : 
-    "http://localhost:3000/data";  
-     axios
+    const api =
+      import.meta.env.VITE_APP_API_URL || "http://localhost:3000/data";
+    axios
       .get(api)
       .then((response) => {
         setData(response.data);
